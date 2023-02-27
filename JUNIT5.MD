@@ -147,7 +147,7 @@ not false in this unitest just skip this unit test. If this.evironment = "prod" 
 We can group all unitest that have same idea to a nested class and that class use @Nested anotation.
 This is a good orgnazation
 
-#### Othe anotation
+#### Other anotations
 @Displayname("name is thanh") : a customize name for a unit test or for a nested class which have @Nested
 
 @Disable(): skip the unitest orr Nested unitest class

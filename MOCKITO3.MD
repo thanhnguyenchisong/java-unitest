@@ -1,5 +1,11 @@
 # MOCKITO
+### Mocking Theory
 Mockito to mock the dependencies.
+
+In the case the method for testing is big complex with many dependencies, so when run the unit test it can be fail by dependencies, It's from our target testing - we would like to test for scope of our logics, source code in our method only, not for dependencies. We want the testes to fail only when the method contains bugs.
+So the solution, insteal of using real dependencies, we can use dummy dependencies.
+We use mock method from **Mockito** to create dummy objects, that behave as real dependencies
+
 1. Have to mock the object
 2. Mock object can be use in mock method and result of method in side of object. 
 3. **Default values of mock method**
@@ -86,14 +92,14 @@ If you would like to pass that strict stubbing (No exception). Uses:
 
 ### 12. Mocking static method
 ``MockStatic`` since version 3.4.0
-- In the past we use PowerMock to mock the static method but don't need any more since mockuto 3.4.0
-
+- In the past we use PowerMock to mock the static method but don't need any more since mockito 3.4.0
+    Beside that if you can not update your Mockito lib >= 3.4.0 you have to use one more lib that is Powermock
 Use lib mockito-inline
 
 ``
 MockStatic<CurrencyConverter> mockConverter = mockStatic(CurrencyConverter.class);
-mockConverter.when(() -> service.staticMethod(arg)).thenReturn(expected);
-double actual = service.staticMethod(arg);
+mockConverter.when(() -> CurrencyConverter.staticMethod(arg)).thenReturn(expected);
+double actual = CurrencyConverter.staticMethod(arg);
 assertEqual(expected, actual);
 ``
 
@@ -103,4 +109,20 @@ If you would like return the value base on the inputs in the static mock stub
 ``
 mockConverter.when(() -> service.staticMethod(anyDouble())).thenAnswer(inv -> (double)inv.getArgument(0) * 0.8);
 ``
-### 13. Mocking final and static method
+### 13. Mocking final and private method
+1. Final method
+   Can mock by mockito-inline version
+   Can't mock by mockito-core version
+2. Private method
+   Can't mock private method.
+   From the standpoint of testing... private methods don't exist so don't need to try mock them
+   But in the case you must test on private method we can use method invocation in Java class. It's the way to access and execute your private method.
+
+   ## SUMMARY
+1. Understand mocking theory
+2. Create mocks and spies
+3. Mock method
+4. Appy mat chers and argument captors
+5. USe the verify() method
+6. Work with anotations, BDD style methos and strict stubbling
+7. Mock static and final method.
