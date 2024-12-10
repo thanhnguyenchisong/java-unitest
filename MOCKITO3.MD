@@ -18,7 +18,9 @@ We use mock method from **Mockito** to create dummy objects, that behave as real
 ``when(service.getMethod()).thenReturn(value).thenReturn(value1) ``
 First call to method that will return value, second time call to method will return value1
 ### 3. Throw exception
-``when(service.getMethod()).thenThrow(BussinessException.class)``
+```java
+when(service.getMethod()).thenThrow(BussinessException.class)
+```
 ### 4. Angument matcher
 ``when(service.getMethod(any(), anyDouble())).thenThrow(BussinessException.class)``
 
