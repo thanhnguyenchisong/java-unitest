@@ -27,7 +27,7 @@ public void should_ReturnTrue_When_DietRecommended {
 
 #### Test exceptions
 Can use assertThrows(Exception.class, ...)
-``
+```java
  public void should_ReturnTrue_When_DietRecommended {
     //given
         double weight = 50.0;
@@ -37,23 +37,23 @@ Can use assertThrows(Exception.class, ...)
     //then
        assertThrows(Exception.class, e);
 }
-``
+```
 
 #### Test with multiple assertions
 Can use many assertions in a method - if it pass all of assertions => It works fine
 if we write is as sequently assertion1; assertion2; then if assention 1 be false then application will never go to assertion2.
-``
+```java
    assertion1;
     assertion2;
-``
+```
 => We don't know anything about assertion2. 
 So we should use assertAll
-``
+```java
  assertAll(
   () => assertion1;
   () => assertion2;
  );
-``
+```
 This way will run all assertions 1 and 2, then we can fix it in a time and have better overview of error of this method
 
 #### Test null value
@@ -72,7 +72,7 @@ Same as name meanin, just run at before run unitest and all unit test have finis
 
 #### Parameterized Tests - ValueSource
 It just do for a value inside of source code only
-``
+```java
 @ParameterizedTest
 @ValueSource(doubles = {70.0, 60.0})
 void should_ReturnTrue_When_DietRecommended(Double coderWeight) {
@@ -82,12 +82,12 @@ void should_ReturnTrue_When_DietRecommended(Double coderWeight) {
     //when
     //then
 }
-``
+```
 This unitest will run with parameter frrom @ValueSource. Each of value in @ValueSource will run a time - So that mean this unitest will run 2 times with 2 different input is 70.0 and 60.0
 
 #### Parameterized Tests - CsvSource
 
-``
+```java
 @ParameterizedTest
 @CsvSource(doubles = {"70.0, 1.0", "60.0, 2.0"})
 void should_ReturnTrue_When_DietRecommended(Double coderWeight, Double coderHeight) {
@@ -97,7 +97,7 @@ void should_ReturnTrue_When_DietRecommended(Double coderWeight, Double coderHeig
     //when
     //then
 }
-``
+```
 This unitest will run with parameter. each of group value in CsvSource will run a time - so we have 2 group "70.0, 1.0", "60.0, 2.0"
 
 To friendly wat we can add the name to display in console to @ParameterizedTest(name ="weight={0}, height={1}")
@@ -107,7 +107,7 @@ The file should have the format
 weight, height
 1,2
 3,4
-``
+```java
 @ParameterizedTest(name ="weight={0}, height={1}")
 @CsvFileSource(resource="/test-data.csv")
 void should_ReturnTrue_When_DietRecommended(Double coderWeight, Double coderHeight) {
@@ -117,11 +117,11 @@ void should_ReturnTrue_When_DietRecommended(Double coderWeight, Double coderHeig
     //when
     //then
 }
-``
+```
 
 #### Repeated tests
 Use it in the case the data given that is random so each of time to testing will run with a diffent input
-``
+```java
 @RepeatedTest(10)
 void should_ReturnTrue_When_DietRecommended(Double coderWeight, Double coderHeight) {
     //given
@@ -130,18 +130,18 @@ void should_ReturnTrue_When_DietRecommended(Double coderWeight, Double coderHeig
     //when
     //then
 }
-``
+```
 
 #### Test performance
 assertTimeout(Duration.ofMillis(1), executableFunction);
 
 #### Assumptions
 To decide skip or run the unit test
-``
+```java
 private this.evironment =  "dev";
 assumeTrue(this.evironment.equals("prod")); //=> value false -> 
 not false in this unitest just skip this unit test. If this.evironment = "prod" the unitest will run
-``
+```
 
 #### @Nested
 We can group all unitest that have same idea to a nested class and that class use @Nested anotation.
