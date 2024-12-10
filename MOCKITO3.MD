@@ -74,8 +74,6 @@ verify(service), time(1)).method(eq(arg), argumentCaptor.capture());
 ```java
  Asserts.assertEquals(expectedValue, ArgumentCaptor.getValue());
 ```
-So the argument captor capture the argument value in that possible and keep it in captor so you can get value to do your checking. We use it in the case we don't know what argument will be passed to that method because that method run inside of another mock method and we just control the input of mock method only.
-
 ### 9. Anotations
 - @Mock: create a mock object
 - @Spy: create a parital mock  object
