@@ -146,6 +146,37 @@ not false in this unitest just skip this unit test. If this.evironment = "prod" 
 #### @Nested
 We can group all unitest that have same idea to a nested class and that class use @Nested anotation.
 This is a good orgnazation
+```java
+class AccountTest {
+
+    private Account account;
+
+    @BeforeEach
+    void setUp() {
+        account = new Account(100); // Initial balance
+    }
+
+    @Test
+    void initialBalanceShouldBeSetCorrectly() {
+        Assertions.assertEquals(100, account.getBalance());
+    }
+
+    @Nested
+    class WhenBalanceIsPositive {
+
+        @Test
+        void withdrawalShouldDecreaseBalance() {
+            account.withdraw(50);
+            Assertions.assertEquals(50, account.getBalance());
+        }
+
+        @Test
+        void depositShouldIncreaseBalance() {
+            account.deposit(50);
+            Assertions.assertEquals(150, account.getBalance());
+        }
+    }
+```
 
 #### Other anotations
 @Displayname("name is thanh") : a customize name for a unit test or for a nested class which have @Nested
