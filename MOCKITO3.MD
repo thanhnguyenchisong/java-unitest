@@ -41,7 +41,9 @@ In the case with would like to match a any() angument and next one agument with 
 ``verifyNoMoreInteractions(service);``
 
 ### 6. Spy
-Use ``spy`` - we will call the actual methods from actual classes. So in situation spy method also should be return our dummy object we can use
+Use ``spy`` - That is partial mock the object. That mean the moethod was mock with doReturn that will return our dummy data, with other will run with a real method.
+
+we will call the actual methods from actual classes. So in situation spy method also should be return our dummy object we can use
 ``
 doReturn(expectedObject).when(service).method(arg);
 ``
