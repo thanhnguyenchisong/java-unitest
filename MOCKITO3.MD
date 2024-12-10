@@ -61,14 +61,19 @@ Can not use the ``When`` method with void method
 
 **What different bw when first and do first ???**
 ### 8. Argument Captor
-``ArgumentCaptor<T> argumentCaptor = AngumentCaptor.forClass(T.class);
-``
-create argumentCaptor;
-In the verify method we can sen this captor as argument
-
-``verify(service), time(1)).method(eq(arg), argumentCaptor.capture());
-assertEquals(expectedValue, argumentCaptor.getValue());
-``
+- ArgumentCaptor allows us to capture and inspect the arguments passed to a mocked method. (Mocked method will be called by other real methods).
+```java
+ArgumentCaptor<T> argumentCaptor = AngumentCaptor.forClass(T.class);
+```
+In the verify method we can send this captor as argument
+- Use ``verify()`` to ensure the the method is called and then use capture() to store the argument.
+```java
+verify(service), time(1)).method(eq(arg), argumentCaptor.capture());
+```
+- The captured values can then be checked using ``ArgumentCaptor.getValue()``
+```java
+ Asserts.assertEquals(expectedValue, ArgumentCaptor.getValue());
+```
 So the argument captor capture the argument value in that possible and keep it in captor so you can get value to do your checking. We use it in the case we don't know what argument will be passed to that method because that method run inside of another mock method and we just control the input of mock method only.
 
 ### 9. Anotations
