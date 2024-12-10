@@ -110,7 +110,11 @@ public class ArgumentCaptorTest {
 - @Mock: create a mock object
 - @Spy: create a parital mock  object
 - @InjectMock: create instance which will use all mock and spy which were create by @Mock and @Spy
-- @Captor
+- @Captor: Short way to create captor in declaration way
+```java
+    @Captor
+    private ArgumentCaptor<String> userIdCaptor; 
+```
 ### 10. Mockito BDD
 Mockito provides BDDMockito to you can write readable source code with pattern **given-when-then**
 
