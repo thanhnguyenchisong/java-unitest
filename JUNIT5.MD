@@ -14,7 +14,7 @@ We have some name pattern for unitest test method, it should clear overview the 
 
 convenstion.
 
-``
+```java
 public void should_ReturnTrue_When_DietRecommended {
     //given
         ...
@@ -23,7 +23,7 @@ public void should_ReturnTrue_When_DietRecommended {
     //then
         ...
 }
-``
+```
 
 #### Test exceptions
 Can use assertThrows(Exception.class, ...)
