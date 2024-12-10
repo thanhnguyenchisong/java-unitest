@@ -74,6 +74,38 @@ verify(service), time(1)).method(eq(arg), argumentCaptor.capture());
 ```java
  Asserts.assertEquals(expectedValue, ArgumentCaptor.getValue());
 ```
+- Example
+```java
+public class ArgumentCaptorTest {
+
+    @Test
+    void testArgumentCaptor() {
+        // Step 1: Create a mock of NotificationService
+        NotificationService notificationServiceMock = mock(NotificationService.class);
+
+        // Step 2: Create an instance of UserService and pass the mocked NotificationService
+        UserService userService = new UserService(notificationServiceMock);
+
+        // Step 3: Invoke the method under test (notifyUser) with some sample data
+        userService.notifyUser("12345", "Hello, User!");
+
+        // Step 4: Create ArgumentCaptor objects for each argument type (userId and message)
+        ArgumentCaptor<String> userIdCaptor = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> messageCaptor = ArgumentCaptor.forClass(String.class);
+
+        // Step 5: Verify that sendNotification was called and capture the arguments passed to it
+        verify(notificationServiceMock).sendNotification(userIdCaptor.capture(), messageCaptor.capture());
+
+        // Step 6: Get the captured values from the ArgumentCaptor
+        String capturedUserId = userIdCaptor.getValue(); // The captured userId argument
+        String capturedMessage = messageCaptor.getValue(); // The captured message argument
+
+        // Step 7: Perform assertions to validate that the captured values are as expected
+        assertEquals("12345", capturedUserId);  // Verify that the userId is correct
+        assertEquals("Hello, User!", capturedMessage);  // Verify that the message is correct
+    }
+}
+```
 ### 9. Anotations
 - @Mock: create a mock object
 - @Spy: create a parital mock  object
