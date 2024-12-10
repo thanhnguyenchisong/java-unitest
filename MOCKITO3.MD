@@ -117,10 +117,40 @@ mockConverter.when(() -> service.staticMethod(anyDouble())).thenAnswer(inv -> (d
 1. Final method
    Can mock by mockito-inline version
    Can't mock by mockito-core version
+   With mockito-inline
+```java
+class FinalMethodTest {
+    @Test
+    void testFinalMethodMocking() {
+        FinalClass finalClassMock = mock(FinalClass.class);
+
+        when(finalClassMock.finalMethod()).thenReturn("Mocked Behavior");
+
+        assert "Mocked Behavior".equals(finalClassMock.finalMethod());
+    }
+}
+```
 2. Private method
    Can't mock private method.
    From the standpoint of testing... private methods don't exist so don't need to try mock them
    But in the case you must test on private method we can use method invocation in Java class. It's the way to access and execute your private method.
+   You also can you PowerMock to mock the private method
+```java
+@Test
+    public void testPrivateMethod() throws Exception {
+        MyClass myClass = PowerMockito.spy(new MyClass());
+
+        // Mock the private method
+        PowerMockito.doReturn("Mocked Hello").when(myClass, "privateMethod", "World");
+
+        // Verify behavior
+        Method privateMethod = MyClass.class.getDeclaredMethod("privateMethod", String.class);
+        privateMethod.setAccessible(true);
+        String result = (String) privateMethod.invoke(myClass, "World");
+
+        assertEquals("Mocked Hello", result);
+    }
+```
 
    ## SUMMARY
 1. Understand mocking theory
